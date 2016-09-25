@@ -10,17 +10,35 @@ AWS.config.update({
 })
 var s3 = new AWS.S3();
 
+var files = {};
+
 module.exports = function(bot) {
   bot.on('message', function(message) {
-    console.log(message);
+    if( message.subtype != 'file_share' || !message.file ) { return; }
+    files[message.file.id] = message.file;
   })
 
-  bot.hearsOnce({text: 'hello'}, function() {
-    bot.say('dope');
+  bot.hears({type: 'reaction_added', reaction: 'satellite_antenna'}, function(message) {
+    if( !message.item || !message.item.file ) { return; }
+
+    var file = files[message.item.file];
+    if( !file ) { return console.warn("No file", message.item); }
+
+    if( file.s3Url ) { return bot.say(file.s3Url); }
+
+    upload({
+      file: file
+    }, function(err, url) {
+      if( err ) { return console.error(err); }
+      file.s3Url = url;
+      bot.say(url);
+    })
   })
 }
 
-module.exports.upload = function upload(message, cb) {
+module.exports.upload = upload;
+
+function upload(message, cb) {
   if( !message || !message.file || !message.file.url_private || !message.file.name ) {
     return cb(new Error("Invalid message"));
   }

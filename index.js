@@ -7,5 +7,5 @@ bot.start(function(err) {
   if( err ) { throw err; }
 
 
-  bot.addTrait(require('./traits/slack2s3'));
+  bot.addTrait(require('./traits/s6'));
 })

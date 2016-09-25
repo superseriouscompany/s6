@@ -1,7 +1,7 @@
 var Tinybot = require('tinybot');
 var secrets = require('./secrets.json');
 
-var bot = new Tinybot(secrets.token, 'C2EVDHF5L');
+var bot = new Tinybot(secrets.token, '#marvinandme');
 
 bot.start(function(err) {
   if( err ) { throw err; }

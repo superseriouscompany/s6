@@ -26,6 +26,7 @@ module.exports = function(bot) {
 
     if( file.s3Url ) { return bot.say(file.s3Url); }
 
+    bot.say('Uploading...');
     upload({
       file: file
     }, function(err, url) {

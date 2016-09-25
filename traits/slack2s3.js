@@ -1,7 +1,7 @@
 var AWS       = require('aws-sdk');
 var URL       = require('url');
 var https     = require('https');
-var secrets   = require('./secrets.json');
+var secrets   = require('../secrets.json');
 var token     = secrets.token;
 
 AWS.config.update({
@@ -10,7 +10,17 @@ AWS.config.update({
 })
 var s3 = new AWS.S3();
 
-module.exports = function(message, cb) {
+module.exports = function(bot) {
+  bot.on('message', function(message) {
+    console.log(message);
+  })
+
+  bot.hearsOnce({text: 'hello'}, function() {
+    bot.say('dope');
+  })
+}
+
+module.exports.upload = function upload(message, cb) {
   if( !message || !message.file || !message.file.url_private || !message.file.name ) {
     return cb(new Error("Invalid message"));
   }

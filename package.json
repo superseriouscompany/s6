@@ -22,6 +22,13 @@
   },
   "homepage": "https://github.com/superseriouscompany/s6#readme",
   "dependencies": {
+    "aws-sdk": "^2.6.4",
+    "debug": "^2.2.0",
     "tinybot": "^1.0.1"
+  },
+  "devDependencies": {
+    "async": "^2.0.1",
+    "expect": "^1.20.2",
+    "mocha": "^3.0.2"
   }
 }

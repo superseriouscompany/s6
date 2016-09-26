@@ -1,7 +1,11 @@
 var Tinybot = require('tinybot');
-var secrets = require('./secrets.json');
 
-var bot = new Tinybot(secrets.token, '#marvinandme');
+var token = process.env.SLACK_BOT_TOKEN;
+if( !token ) {
+  return console.error("Please provide SLACK_BOT_TOKEN");
+}
+
+var bot = new Tinybot(token, process.env.CHANNEL || '#general');
 
 bot.start(function(err) {
   if( err ) { throw err; }

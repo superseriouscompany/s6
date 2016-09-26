@@ -1,9 +1,7 @@
 # s6 - Super Serious Simple Storage Service Service
 
-## Installation
+## Usage
 
-Set SLACK_BOT_TOKEN to a valid token
+    $ SLACK_BOT_TOKEN=myslackbottoken CHANNEL=random npm start
 
-    $ npm start
-
-Boom, you're done!
+`CHANNEL` is the channel that s6 posts to and will be `#general` by default
